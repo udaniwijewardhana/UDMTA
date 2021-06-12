@@ -17,7 +17,7 @@ with or without predictor variables (numeric/factor). The above names are case s
 
 ## Installation Instructions
 
-- Download the https://github.com/uwijewardhana/UDMTA/ repository zip folder and extract and run the app on your r console.
+- Download the https://github.com/uwijewardhana/UDMTA/ repository zip folder and extract and run the app.R on your r console.
 
 ```r
 shiny::runGitHub( "UDMTA", "uwijewardhana") 
