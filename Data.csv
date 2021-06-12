@@ -1,0 +1,141 @@
+Species,year,temp,rainfall,Count,Protected,Year
+Australian Pied Oystercatcher,2010,14.75,854.6,6,P,1
+Australian Pied Oystercatcher,2011,14.6,873.4,8,P,2
+Australian Pied Oystercatcher,2012,14.65,877.8,3,P,3
+Australian Pied Oystercatcher,2013,15,806.6,3,P,4
+Australian Pied Oystercatcher,2014,15.15,658.8,107,P,5
+Australian Pied Oystercatcher,2015,14.6,545.6,8,P,6
+Australian Pied Oystercatcher,2016,15.05,646.2,2,P,7
+Australian Pied Oystercatcher,2017,14.85,720.4,15,P,8
+Australian Pied Oystercatcher,2018,15,645.2,21,P,9
+Australian Pied Oystercatcher,2019,14.9,591.8,17,P,10
+Black-fronted Dotterel,2010,14.75,854.6,30,P,1
+Black-fronted Dotterel,2011,14.6,873.4,6,P,2
+Black-fronted Dotterel,2012,14.65,877.8,11,P,3
+Black-fronted Dotterel,2013,15,806.6,36,P,4
+Black-fronted Dotterel,2014,15.15,658.8,67,P,5
+Black-fronted Dotterel,2015,14.6,545.6,87,P,6
+Black-fronted Dotterel,2016,15.05,646.2,34,P,7
+Black-fronted Dotterel,2017,14.85,720.4,46,P,8
+Black-fronted Dotterel,2018,15,645.2,223,P,9
+Black-fronted Dotterel,2019,14.9,591.8,104,P,10
+Hooded Plover,2010,14.75,854.6,110,P,1
+Hooded Plover,2011,14.6,873.4,14,P,2
+Hooded Plover,2012,14.65,877.8,54,P,3
+Hooded Plover,2013,15,806.6,63,P,4
+Hooded Plover,2014,15.15,658.8,119,P,5
+Hooded Plover,2015,14.6,545.6,76,P,6
+Hooded Plover,2016,15.05,646.2,97,P,7
+Hooded Plover,2017,14.85,720.4,86,P,8
+Hooded Plover,2018,15,645.2,71,P,9
+Hooded Plover,2019,14.9,591.8,82,P,10
+Red-capped Dotterel,2010,14.75,854.6,NA,P,1
+Red-capped Dotterel,2011,14.6,873.4,9,P,2
+Red-capped Dotterel,2012,14.65,877.8,NA,P,3
+Red-capped Dotterel,2013,15,806.6,18,P,4
+Red-capped Dotterel,2014,15.15,658.8,1,P,5
+Red-capped Dotterel,2015,14.6,545.6,16,P,6
+Red-capped Dotterel,2016,15.05,646.2,11,P,7
+Red-capped Dotterel,2017,14.85,720.4,18,P,8
+Red-capped Dotterel,2018,15,645.2,52,P,9
+Red-capped Dotterel,2019,14.9,591.8,12,P,10
+Red-kneed Dotterel,2010,14.75,854.6,NA,P,1
+Red-kneed Dotterel,2011,14.6,873.4,NA,P,2
+Red-kneed Dotterel,2012,14.65,877.8,2,P,3
+Red-kneed Dotterel,2013,15,806.6,20,P,4
+Red-kneed Dotterel,2014,15.15,658.8,32,P,5
+Red-kneed Dotterel,2015,14.6,545.6,NA,P,6
+Red-kneed Dotterel,2016,15.05,646.2,1,P,7
+Red-kneed Dotterel,2017,14.85,720.4,2,P,8
+Red-kneed Dotterel,2018,15,645.2,155,P,9
+Red-kneed Dotterel,2019,14.9,591.8,75,P,10
+Masked Lapwing,2010,14.75,854.6,419,P,1
+Masked Lapwing,2011,14.6,873.4,235,P,2
+Masked Lapwing,2012,14.65,877.8,285,P,3
+Masked Lapwing,2013,15,806.6,377,P,4
+Masked Lapwing,2014,15.15,658.8,370,P,5
+Masked Lapwing,2015,14.6,545.6,356,P,6
+Masked Lapwing,2016,15.05,646.2,304,P,7
+Masked Lapwing,2017,14.85,720.4,617,P,8
+Masked Lapwing,2018,15,645.2,660,P,9
+Masked Lapwing,2019,14.9,591.8,633,P,10
+Sooty Oystercatcher,2010,14.75,854.6,110,P,1
+Sooty Oystercatcher,2011,14.6,873.4,146,P,2
+Sooty Oystercatcher,2012,14.65,877.8,226,P,3
+Sooty Oystercatcher,2013,15,806.6,145,P,4
+Sooty Oystercatcher,2014,15.15,658.8,260,P,5
+Sooty Oystercatcher,2015,14.6,545.6,160,P,6
+Sooty Oystercatcher,2016,15.05,646.2,182,P,7
+Sooty Oystercatcher,2017,14.85,720.4,156,P,8
+Sooty Oystercatcher,2018,15,645.2,255,P,9
+Sooty Oystercatcher,2019,14.9,591.8,286,P,10
+Australian Pied Oystercatcher,2010,14.75,854.6,6,NP,1
+Australian Pied Oystercatcher,2011,14.6,873.4,8,NP,2
+Australian Pied Oystercatcher,2012,14.65,877.8,3,NP,3
+Australian Pied Oystercatcher,2013,15,806.6,3,NP,4
+Australian Pied Oystercatcher,2014,15.15,658.8,107,NP,5
+Australian Pied Oystercatcher,2015,14.6,545.6,8,NP,6
+Australian Pied Oystercatcher,2016,15.05,646.2,2,NP,7
+Australian Pied Oystercatcher,2017,14.85,720.4,15,NP,8
+Australian Pied Oystercatcher,2018,15,645.2,21,NP,9
+Australian Pied Oystercatcher,2019,14.9,591.8,17,NP,10
+Black-fronted Dotterel,2010,14.75,854.6,30,NP,1
+Black-fronted Dotterel,2011,14.6,873.4,6,NP,2
+Black-fronted Dotterel,2012,14.65,877.8,11,NP,3
+Black-fronted Dotterel,2013,15,806.6,36,NP,4
+Black-fronted Dotterel,2014,15.15,658.8,67,NP,5
+Black-fronted Dotterel,2015,14.6,545.6,87,NP,6
+Black-fronted Dotterel,2016,15.05,646.2,34,NP,7
+Black-fronted Dotterel,2017,14.85,720.4,46,NP,8
+Black-fronted Dotterel,2018,15,645.2,223,NP,9
+Black-fronted Dotterel,2019,14.9,591.8,104,NP,10
+Hooded Plover,2010,14.75,854.6,110,NP,1
+Hooded Plover,2011,14.6,873.4,14,NP,2
+Hooded Plover,2012,14.65,877.8,54,NP,3
+Hooded Plover,2013,15,806.6,63,NP,4
+Hooded Plover,2014,15.15,658.8,119,NP,5
+Hooded Plover,2015,14.6,545.6,76,NP,6
+Hooded Plover,2016,15.05,646.2,97,NP,7
+Hooded Plover,2017,14.85,720.4,86,NP,8
+Hooded Plover,2018,15,645.2,71,NP,9
+Hooded Plover,2019,14.9,591.8,82,NP,10
+Red-capped Dotterel,2010,14.75,854.6,NA,NP,1
+Red-capped Dotterel,2011,14.6,873.4,9,NP,2
+Red-capped Dotterel,2012,14.65,877.8,NA,NP,3
+Red-capped Dotterel,2013,15,806.6,18,NP,4
+Red-capped Dotterel,2014,15.15,658.8,1,NP,5
+Red-capped Dotterel,2015,14.6,545.6,16,NP,6
+Red-capped Dotterel,2016,15.05,646.2,11,NP,7
+Red-capped Dotterel,2017,14.85,720.4,18,NP,8
+Red-capped Dotterel,2018,15,645.2,52,NP,9
+Red-capped Dotterel,2019,14.9,591.8,12,NP,10
+Red-kneed Dotterel,2010,14.75,854.6,NA,NP,1
+Red-kneed Dotterel,2011,14.6,873.4,NA,NP,2
+Red-kneed Dotterel,2012,14.65,877.8,2,NP,3
+Red-kneed Dotterel,2013,15,806.6,20,NP,4
+Red-kneed Dotterel,2014,15.15,658.8,32,NP,5
+Red-kneed Dotterel,2015,14.6,545.6,NA,NP,6
+Red-kneed Dotterel,2016,15.05,646.2,1,NP,7
+Red-kneed Dotterel,2017,14.85,720.4,2,NP,8
+Red-kneed Dotterel,2018,15,645.2,155,NP,9
+Red-kneed Dotterel,2019,14.9,591.8,75,NP,10
+Masked Lapwing,2010,14.75,854.6,419,NP,1
+Masked Lapwing,2011,14.6,873.4,235,NP,2
+Masked Lapwing,2012,14.65,877.8,285,NP,3
+Masked Lapwing,2013,15,806.6,377,NP,4
+Masked Lapwing,2014,15.15,658.8,370,NP,5
+Masked Lapwing,2015,14.6,545.6,356,NP,6
+Masked Lapwing,2016,15.05,646.2,304,NP,7
+Masked Lapwing,2017,14.85,720.4,617,NP,8
+Masked Lapwing,2018,15,645.2,660,NP,9
+Masked Lapwing,2019,14.9,591.8,633,NP,10
+Sooty Oystercatcher,2010,14.75,854.6,110,NP,1
+Sooty Oystercatcher,2011,14.6,873.4,146,NP,2
+Sooty Oystercatcher,2012,14.65,877.8,226,NP,3
+Sooty Oystercatcher,2013,15,806.6,145,NP,4
+Sooty Oystercatcher,2014,15.15,658.8,260,NP,5
+Sooty Oystercatcher,2015,14.6,545.6,160,NP,6
+Sooty Oystercatcher,2016,15.05,646.2,182,NP,7
+Sooty Oystercatcher,2017,14.85,720.4,156,NP,8
+Sooty Oystercatcher,2018,15,645.2,255,NP,9
+Sooty Oystercatcher,2019,14.9,591.8,286,NP,10
