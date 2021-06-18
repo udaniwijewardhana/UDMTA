@@ -72,7 +72,7 @@ filedata1 <- reactive({
     if (is.null(inFile)){return(NULL)}
     
     x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-    x$count <- as.character(x$count)
+    x$Count <- as.character(x$Count)
     x$Count <- as.numeric(x$Count)
 
     y = dplyr::select_if(x, is.numeric)
