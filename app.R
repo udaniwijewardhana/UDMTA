@@ -4,14 +4,14 @@ library(DT)
 library(plyr)
 library(dplyr)
 library(leaflet)
-#library(INLA)
+library(INLA)
 
 ################################################################################################################
 # Shiny App for Annual Species Temporal Abundance Models 
 ################################################################################################################
 
-#"First the user needs to upload the data csv file into the application and 
-#then select whether normalize the numerical predictors or not.
+# First the user needs to upload the data csv file into the application and 
+# then select whether normalize the numerical predictors or not.
 #         The data file should include only:
 #         1. Species - Different species
 #         2. Year - Detected Year
@@ -72,7 +72,9 @@ filedata1 <- reactive({
     if (is.null(inFile)){return(NULL)}
     
     x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-             
+    x$count <- as.character(x$count)
+    x$Count <- as.numeric(x$Count)
+
     y = dplyr::select_if(x, is.numeric)
     z = cbind(Species = x[ , (names(x) %in% c("Species"))], y)
     Final <- unique(z)
