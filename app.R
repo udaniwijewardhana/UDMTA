@@ -270,14 +270,18 @@ fitsummary <- reactive({
     }
     
     model <- list()
+    results <- list()
 
     for (i in 1:length(unique(df$Species))){
       
     model[[i]] <- INLA::inla(formula, data = lst[[i]], family = distribution,
                   control.family = list(link = "log"),
                   control.compute = list(dic = TRUE,cpo = TRUE, po = TRUE), verbose = TRUE)
+    
+    results[[i]] <- model[[i]]$summary.fixed[,c(1:3,5)]
+    
     }
-    return(lapply(seq_along(X), function(x) model[[x]]$summary.fixed[,c(1:3,5)]))
+    return(results)
     }
 })
   
