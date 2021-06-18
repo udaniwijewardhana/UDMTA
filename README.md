@@ -13,7 +13,7 @@ The data file should include only:
   1. Species - Different species
   2. Year - Detected Year
   3. Count - Species count
-with or without predictor variables (numeric/factor). The above names are case sensitive. A sample format of the data can be found in https://github.com/uwijewardhana/UDMTA.
+with or without predictor variables (numeric/factor). The above names are case sensitive. A sample format of the data can be found in Data.CSV.
 
 ## Installation Instructions
 
