@@ -4,7 +4,7 @@ library(DT)
 library(plyr)
 library(dplyr)
 library(leaflet)
-library(INLA)
+#library(INLA)
 
 ################################################################################################################
 # Shiny App for Annual Species Temporal Abundance Models 
@@ -285,7 +285,7 @@ fitsummary <- reactive({
   
 fitsum <- eventReactive(input$summary, {fitsummary()})
 output$summary <- renderPrint({return(fitsum())})
-  
+
 url <- a("Definition", href="https://rdrr.io/github/andrewzm/INLA/man/inla.mesh.2d.html")
 output$tab <- renderUI({tagList("URL link:", url)})
   
