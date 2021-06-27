@@ -7,18 +7,20 @@ library(leaflet)
 library(INLA)
 
 ################################################################################################################
-# Shiny App for Annual Species Temporal Abundance Models 
+# Shiny App for Species Annual Temporal Abundance Models 
 ################################################################################################################
 
 # First the user needs to upload the data csv file into the application and 
 # then select whether normalize the numerical predictors or not.
-#         The data file should include only:
+# The data file should include only:
 #         1. Species - Different species
 #         2. Year - Detected Year
 #         3. Count - Species count
 #         with or without predictor variables (numeric/factor).
-#         The above names are case sensitive."),
+# Only a single categorical variable can be used with any number of numerical variables.
+# The above names are case sensitive.
 # A sample format of the data can be found in https://github.com/uwijewardhana/UDMTA.
+# Data should be ordered according to factor levels as in sample "Data.csv".
 
 ### Shiny User Interface ###
 
@@ -167,7 +169,7 @@ num <- reactive({
   d3 <- d1[rep(seq_len(nrow(d1)), length(unique(x$Species))), ]
   d3$Species <- rep(unique(x$Species), each = length(unique(x$Year)))
   d3$ID <- paste(d3$Species, d3$Year, sep = "-", collapse = NULL)
-  d4 <- join(d3, data, by = "ID", type = "left", match = "all")
+  d4 <- join(d3, d2, by = "ID", type = "left", match = "all")
   d4 <- d4[order(d4$Species, d4$Year),]
   d3 <- d3[ , !(names(d3) %in% c("ID"))]
   Count = d4$Count
@@ -210,12 +212,12 @@ fac <- reactive({
     
     if(is.null(p)){
       Final = x
+      Final <- unique(x)
     }else {
       z = dplyr::select_if(x, is.factor)
       Count <- x[ , (names(x) %in% c("Count"))]
       n = nrow(x)/length(unique(x$Year))
       p <- xx[rep(seq_len(nrow(xx)), n), ]
-      
       Final = cbind(p, Count, z)
     }
     return(Final)
