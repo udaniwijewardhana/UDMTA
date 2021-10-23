@@ -14,7 +14,7 @@ library(INLA)
 # then select whether normalize the numerical predictors or not.
 # The data file should include only:
 #         1. Species - Different species
-#         2. Year - Detected Year
+#         2. Trend - Detected Trend
 #         3. Count - Species count
 #         with or without predictor variables (numeric/factor).
 # The above names are case sensitive.
@@ -90,7 +90,7 @@ filedata2 <- reactive({
     if(ncol(y)>2){
     p = subset(y, select = -c(Count))
     p <- unique(p)
-    p = subset(p, select = -c(Year))
+    p = subset(p, select = -c(Trend))
     }else {p = NULL}
     
     if(!is.null(p)){
@@ -153,7 +153,7 @@ num <- reactive({
   if(ncol(y)>2){
     p = subset(y, select = -c(Count))
     p <- unique(p)
-    p = subset(p, select = -c(Year))
+    p = subset(p, select = -c(Trend))
   }else {p = NULL}
 
   if(!is.null(p)){
@@ -162,14 +162,14 @@ num <- reactive({
   }else if(input$prednorm == "stand") {p[,i] <- round(scale(p[,i]), digits = 4)
   }else {p[,i] <- p[,i]}}}
   
-  d1 = cbind(Year = unique(x$Year), p, effect = unique(x$Year))
-  d2 <- aggregate(Count ~ Species + Year, x, FUN = sum)
-  d2$ID <- paste(d2$Species, d2$Year, sep = "-", collapse = NULL)
+  d1 = cbind(Trend = unique(x$Trend), p, effect = unique(x$Trend))
+  d2 <- aggregate(Count ~ Species + Trend, x, FUN = sum)
+  d2$ID <- paste(d2$Species, d2$Trend, sep = "-", collapse = NULL)
   d3 <- d1[rep(seq_len(nrow(d1)), length(unique(x$Species))), ]
-  d3$Species <- rep(unique(x$Species), each = length(unique(x$Year)))
-  d3$ID <- paste(d3$Species, d3$Year, sep = "-", collapse = NULL)
+  d3$Species <- rep(unique(x$Species), each = length(unique(x$Trend)))
+  d3$ID <- paste(d3$Species, d3$Trend, sep = "-", collapse = NULL)
   d4 <- join(d3, d2, by = "ID", type = "left", match = "all")
-  d4 <- d4[order(d4$Species, d4$Year),]
+  d4 <- d4[order(d4$Species, d4$Trend),]
   d3 <- d3[ , !(names(d3) %in% c("ID"))]
   Count = d4$Count
   Final <- cbind(d3, Count)
@@ -198,7 +198,7 @@ fac <- reactive({
     if(ncol(y)>2){
       p = subset(y, select = -c(Count))
       p <- unique(p)
-      p = subset(p, select = -c(Year))
+      p = subset(p, select = -c(Trend))
     }else {p = NULL}
     
     if(!is.null(p)){
@@ -207,7 +207,7 @@ fac <- reactive({
     }else if(input$prednorm == "stand") {p[,i] <- round(scale(p[,i]), digits = 4)
     }else {p[,i] <- p[,i]}}}
     
-    xx = cbind(Year = unique(x$Year), p, effect = unique(x$Year))
+    xx = cbind(Trend = unique(x$Trend), p, effect = unique(x$Trend))
     
     if(is.null(p)){
       Final = x
