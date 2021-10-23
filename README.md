@@ -6,7 +6,7 @@ Users can use this app to fit temporal models to identify the significant explan
 
 INLA is popular as an approximation tool for fitting Bayesian models. INLA is an alternative robust method for the traditional Markov Chain Monte Carlo (MCMC) based Bayesian analyses (Paul et al. 2010). The key advantages of INLA are the ease with which complex models can be created and modified, without the need to write complex code, and the speed at which inference can be done even for spatial problems with hundreds of thousands of observations (Sarul, 2015).
 
-Users can use UDMTA for single species data using R-INLA. To know if the rate at which abundance is changing over time differs according to a relevant predictor variable, we have included the facility to add interaction terms between any two predictor variables in our regression models. ). This app is suitable to analysis a single area (spatial effect is assumed to be independent and identically distributed). 
+Users can use UDMTA for single species data using R-INLA. To know if the rate at which abundance is changing over time differs according to a relevant predictor variable, we have included the facility to add interaction terms between any two predictor variables in our regression models). This app is suitable to analysis a single area (spatial effect is assumed to be independent and identically distributed). 
 
 ### Input File
 
@@ -16,7 +16,6 @@ The data file should include only:
   2. Year - Detected Year
   3. Count - Species count
 with or without predictor variables (numeric/factor). These names are case sensitive. 
-Only a single categorical variable can be used with any number of numerical variables.
 A sample format of the data can be found in https://github.com/uwijewardhana/UDMTA.
 Data should be ordered according to factor levels as in sample "Data.csv".
 

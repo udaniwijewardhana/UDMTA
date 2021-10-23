@@ -17,7 +17,6 @@ library(INLA)
 #         2. Year - Detected Year
 #         3. Count - Species count
 #         with or without predictor variables (numeric/factor).
-# Only a single categorical variable can be used with any number of numerical variables.
 # The above names are case sensitive.
 # A sample format of the data can be found in https://github.com/uwijewardhana/UDMTA.
 # Data should be ordered according to factor levels as in sample "Data.csv".
@@ -216,8 +215,12 @@ fac <- reactive({
     }else {
       z = dplyr::select_if(x, is.factor)
       Count <- x[ , (names(x) %in% c("Count"))]
-      n = nrow(x)/length(unique(x$Year))
-      p <- xx[rep(seq_len(nrow(xx)), n), ]
+      val = matrix(NA, nrow = 1, ncol = ncol(z))
+      for(i in 1:ncol(z)){
+        val[1,i] = length(unique(z[,i]))
+      }
+      m = apply(val, 1, prod)
+      p <- xx[rep(seq_len(nrow(xx)), m), ]
       Final = cbind(p, Count, z)
     }
     return(Final)
@@ -229,7 +232,7 @@ independent <- reactive({
     inFile <- input$file
 
     x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-    df = x[ , !(names(x) %in% c("Count", "Species"))]
+    df = x[ , !(names(x) %in% c("Count"))]
     return(names(df))
     }
 })
@@ -242,7 +245,7 @@ makeInteract <- reactive({
     inFile <- input$file
 
     x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-    df = x[ , !(names(x) %in% c("Count", "Species"))]    
+    df = x[ , !(names(x) %in% c("Count"))]    
     return(names(df))
     }
 })
@@ -291,7 +294,7 @@ fitsummary <- reactive({
     model <- lapply(seq_along(1:length(unique(df1$Species))), function(x)
                     inla(as.formula(formula()), data = lst1[[x]], family = distribution(),
                     control.family = list(link = "log"),
-                    control.compute = list(dic = TRUE, cpo = TRUE, config = TRUE)))
+                    control.compute = list(dic = TRUE, cpo = TRUE, config = TRUE), verbose = T))
     results <- lapply(seq_along(1:length(unique(df1$Species))), function(x) model[[x]]$summary.fixed[,c(1:3,5)])
     
     }else {
@@ -299,7 +302,7 @@ fitsummary <- reactive({
     model <- lapply(seq_along(1:length(unique(df2$Species))), function(x)
                     inla(as.formula(formula()), data = lst2[[x]], family = distribution(),
                     control.family = list(link = "log"),
-                    control.compute = list(dic = TRUE, cpo = TRUE)))
+                    control.compute = list(dic = TRUE, cpo = TRUE), verbose = T))
     results <- lapply(seq_along(1:length(unique(df2$Species))), function(x) model[[x]]$summary.fixed[,c(1:3,5)])
     
     }
