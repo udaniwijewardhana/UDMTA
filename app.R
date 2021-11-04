@@ -213,7 +213,7 @@ Final <- reactive({
       c$ID = z$ID
       c = unique(c)
       
-      Final = merge(x = Final, y = c, by = "ID", all.y = TRUE)
+      Final = merge(x = Final, y = c, by = "ID", all.x = TRUE)
       Final = subset(Final, select = -c(ID))
     }
     return(Final)
