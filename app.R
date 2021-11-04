@@ -1,9 +1,8 @@
 # Loading libraries
 library(shiny)
 library(DT)
-library(plyr)
-library(dplyr)
-library(leaflet)
+library(plyr); library(dplyr)
+library(tidyr); library(tidyverse)
 library(INLA)
 
 ################################################################################################################
@@ -20,7 +19,7 @@ library(INLA)
 # User can include any number of factor or numeric variables.
 # Predictor variables should include as character or factor variables.
 # A sample format of the data can be found in https://github.com/uwijewardhana/UDMTA.
-# Data should be ordered according to factor levels as in sample "Data.csv".
+# Data should be ordered according to factor levels and Year as in sample "Data.csv".
 
 ### Shiny User Interface ###
 
@@ -134,37 +133,40 @@ observe({
     interacts[[b]] <- a
 })})
 
-# Create dataframe for regression only with numeric predictor variables
-num <- reactive({
-  
-  x <- filedata1()
-  if (is.null(x)){return(NULL)}
-  p <- filedata2()
-
-  if(input$distribution == "Poisson Hurdle" | input$distribution == "Negative Binomial Hurdle"){
-    x$Count[x$Count == 0] <- NA
-  } else {
-    x$Count = x$Count
+# Checkbox list of all numeric variables to use 
+independent <- reactive({
+  if(!is.null(input$file)){
+    inFile <- input$file
+    
+    x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
+    df = x[ , !(names(x) %in% c("Count"))]
+    return(names(df))
   }
-
-  Count <- aggregate(Count ~ Year, x, FUN = sum)
-  Final = cbind(Year = unique(x$Year), p, 
-                effect = unique(x$Year), Count = Count$Count)
-  return(Final)
 })
 
-# Create dataframe for regression with categorical predictor variables
+output$independent <- renderUI({checkboxGroupInput("independent", "Independent (Predictor) Variables:", independent())})
 
-fac <- reactive({
+# Variables to Add to the List of Combinations  
+makeInteract <- reactive({
+  if(!is.null(input$file)){
+    inFile <- input$file
+    
+    x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
+    df = x[ , !(names(x) %in% c("Count"))]    
+    return(names(df))
+  }
+})
+
+output$makeInteract1 <- renderUI({selectInput("makeInteract1", "Variable1 For Interaction:", makeInteract())})
+output$makeInteract2 <- renderUI({selectInput("makeInteract2", "Variable2 For Interaction:", makeInteract())})
+
+# Create dataframe for regression with predictor variables
+
+Final <- reactive({
   
     x <- filedata1()
     if (is.null(x)){return(NULL)}
     p <- filedata2()
-
-    fac = data.frame(x %>% select_if(~ !((is.integer(.x)) | (is.numeric(.x)))))
-    for(i in 1:ncol(fac)){fac[,i] = as.factor(fac[,i])}  
-    y = dplyr::select_if(x, is.numeric)
-    x <- cbind(y,fac)
     
     if(input$distribution == "Poisson Hurdle" | input$distribution == "Negative Binomial Hurdle"){
       x$Count[x$Count == 0] <- NA
@@ -172,50 +174,50 @@ fac <- reactive({
       x$Count = x$Count
     }
     
-    xx = cbind(Year = unique(x$Year), p, effect = unique(x$Year))
+    fac = x %>% select_if(negate(is.numeric))
+    for(i in 1:ncol(fac)){fac[,i] = as.factor(fac[,i])}  
+    y = dplyr::select_if(x, is.numeric)
+    x <- cbind(y,fac)
     
-    if(is.null(p)){
-      Final = unique(x)
+    n = length(c(input$independent))
+    
+    if(n>1){
+      M = data.frame(x[ , (names(x) %in% c(input$independent))])
+    }else if(n == 0){
+      M = NULL
+    }else{
+      M = data.frame(x[ , (names(x) %in% c(input$independent))])
+      names(M)[1] <- c(input$independent)[1]
+    }
+    
+    if(input$factor == "No"){
+      
+      Count <- aggregate(Count ~ Year, x, FUN = sum)
+      Final = cbind(unique(cbind(M, t = x$Year)), Count = Count$Count, effect = unique(x$Year))
+      Final = subset(Final, select = -c(t))
+      
     }else {
-      z = dplyr::select_if(x, is.factor)
-      Count <- x[ , (names(x) %in% c("Count"))]
-      val = matrix(NA, nrow = 1, ncol = ncol(z))
-      for(i in 1:ncol(z)){
-        val[1,i] = length(unique(z[,i]))
-      }
-      m = apply(val, 1, prod)
-      p <- xx[rep(seq_len(nrow(xx)), m), ]
-      Final = cbind(p, Count, z)
+      
+      z = dplyr::select_if(M, is.factor)
+      z = cbind(z, Year = x$Year)
+      z = unite(z, ID, sep = "-", remove = FALSE, na.rm = FALSE)
+      Final = unique(z)
+      
+      z$Count = x$Count
+      zz <- aggregate(Count ~ ID, z, FUN = sum)
+      Final <- left_join(Final, zz, by = "ID")
+      Final$effect = Final$Year
+      
+      c = dplyr::select_if(M, is.numeric)
+      if("Year" %in% colnames(c)){c = subset(c, select = -c(Year))}
+      c$ID = z$ID
+      c = unique(c)
+      
+      Final = merge(x = Final, y = c, by = "ID", all.y = TRUE)
+      Final = subset(Final, select = -c(ID))
     }
     return(Final)
 })
-
-# Checkbox list of all numeric variables to use 
-independent <- reactive({
-    if(!is.null(input$file)){
-    inFile <- input$file
-
-    x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-    df = x[ , !(names(x) %in% c("Count"))]
-    return(names(df))
-    }
-})
-  
-output$independent <- renderUI({checkboxGroupInput("independent", "Independent (Predictor) Variables:", independent())})
-  
-# Variables to Add to the List of Combinations  
-makeInteract <- reactive({
-    if(!is.null(input$file)){
-    inFile <- input$file
-
-    x <- as.data.frame(read.csv(inFile$datapath, fileEncoding="UTF-8-BOM"))
-    df = x[ , !(names(x) %in% c("Count"))]    
-    return(names(df))
-    }
-})
-  
-output$makeInteract1 <- renderUI({selectInput("makeInteract1", "Variable1 For Interaction:", makeInteract())})
-output$makeInteract2 <- renderUI({selectInput("makeInteract2", "Variable2 For Interaction:", makeInteract())})
 
 # distribution
 distribution <- reactive({
@@ -245,25 +247,22 @@ formula <- reactive({
   
 fitsummary <- reactive({
     
-    df1 <- as.data.frame(fac())
-    df2 <- as.data.frame(num())
-    
+    df <- as.data.frame(Final())
+
     if(input$factor == "Yes"){
       
-    model <- inla(as.formula(formula()), data = df1, family = distribution(),
+    model <- inla(as.formula(formula()), data = df, family = distribution(),
              control.family = list(link = "log"),
              control.compute = list(dic = TRUE, cpo = TRUE, config = TRUE), verbose = T)
-    results <- model$summary.fixed[,c(1:3,5)]
-    
+
     }else {
   
-    model <- inla(as.formula(formula()), data = df2, family = distribution(),
+    model <- inla(as.formula(formula()), data = df, family = distribution(),
              control.family = list(link = "log"),
              control.compute = list(dic = TRUE, cpo = TRUE), verbose = T)
-    results <- model$summary.fixed[,c(1:3,5)]
-    
+
     }
-    return(results)
+    return(summary(model))
 })
   
 # Summary output of SDM
