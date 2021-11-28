@@ -18,7 +18,7 @@ Data should be ordered according to factor levels as in sample "Data.csv".
 
 ## Installation Instructions
 
-To build this Shiny app, we need to clone the GitHub repository from https://github.com/uwijewardhana/UDMTA and save it in our computer. This folder contains a sample Data.CSV file, the vignette and app.R file. Then, we can launch the app by clicking the Run App button at the top of the RStudio editor or by executing runApp("appdir_path")where appdir_path is the path of the directory that contains the app.R file. For this we need to install R and RStudio in our computer. User can download and install package R-INLA by  http://www.r-inla.org/download. 
+To build this Shiny app, we need to clone the GitHub repository from https://github.com/udaniwijewardhana/UDMTA and save it in our computer. This folder contains a sample Data.CSV file, the vignette and app.R file. Then, we can launch the app by clicking the Run App button at the top of the RStudio editor or by executing runApp("appdir_path")where appdir_path is the path of the directory that contains the app.R file. For this we need to install R and RStudio in our computer. User can download and install package R-INLA by  http://www.r-inla.org/download. 
 
 ### Reference
 
