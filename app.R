@@ -54,10 +54,12 @@ tabPanel("Species Distribution Model",
          uiOutput("makeInteract1"), uiOutput("makeInteract2"),
          uiOutput("uiAdded"), actionButton("actionBtnAdd", "Create Interaction Term"),
          hr(),
-         actionButton("summary", "Summary"))),
+         actionButton("summary", "Summary"),
+         actionButton("predict", "Predict"))),
                
 mainPanel(fluidRow(column(12, p(tags$b('Summary results of species distribution model:', style = "font-size: 150%; font-family:Helvetica; color:#4c4c4c; text-align:left;")))),
-          fluidRow(column(12, verbatimTextOutput("summary"))))
+          fluidRow(column(12, verbatimTextOutput("summary"))),
+          fluidRow(column(12, verbatimTextOutput("predict"))))
 
 ))))
 
@@ -262,13 +264,26 @@ fitsummary <- reactive({
              control.compute = list(dic = TRUE, cpo = TRUE), verbose = T)
 
     }
-    return(summary(model))
+    return(model)
+})
+
+fitres <- reactive({
+  round(fitsummary()$summary.fixed[c(1:3,5)], digits = 3)
+})
+
+fitpredict <- reactive({
+  round(fitsummary()$summary.linear.predictor[c(1:3,5)], digits = 3)
 })
   
 # Summary output of SDM
   
-fitsum <- eventReactive(input$summary, {fitsummary()})
+fitsum <- eventReactive(input$summary, {fitres()})
 output$summary <- renderPrint({return(fitsum())})
+
+# Predictions of SDM
+
+fitpred <- eventReactive(input$predict, {fitpredict()})
+output$predict <- renderPrint({return(fitpred())})
 
 }
 
